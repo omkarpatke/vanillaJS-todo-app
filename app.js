@@ -44,7 +44,11 @@ function deletecheck(e){
     //delete todo
     if(item.classList[0] === 'trash-btn'){
         const todo = item.parentElement;
-        todo.remove();
+        todo.classList.add('fall');
+        // add addEventListener because when animation done then remove the todo
+        todo.addEventListener('transitionend' , function(){
+          todo.remove();
+        })  
     }
     //check mark
     if(item.classList[0] === 'complete-btn'){
