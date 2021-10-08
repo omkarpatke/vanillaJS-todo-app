@@ -65,7 +65,7 @@ function filterTodo(e){
   todos.forEach(function(todo){
       switch(e.target.value){
           case "all":
-            
+            todo.style.display = 'flex';
               break; 
               
               case "completed":
