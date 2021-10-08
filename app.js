@@ -1,17 +1,17 @@
 const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-btn');
 const todoList = document.querySelector('.todo-list');
-const filterOption = document.querySelector('.filter-todo')
+const filterDiv = document.querySelector('.filter')
 // Add EventListener to button
 todoButton.addEventListener('click' , addTodo);
 todoList.addEventListener('click' , deletecheck);
-filterOption.addEventListener('click' , filterTodo);
+filterDiv.addEventListener('click' , filterTodo);
 document.addEventListener('DOMContentLoaded' , getTodo)
 // Function
 
 function addTodo(event){
     event.preventDefault();
-    if(todoInput.value.length != 0){
+    if(todoInput.value.length !== 0){
     // create new div element
     const newdiv = document.createElement('div');
     newdiv.classList.add('todo');
@@ -38,7 +38,8 @@ function addTodo(event){
 
     todoList.appendChild(newdiv);
     todoInput.value = '';
-}}
+    } 
+}
 
 function deletecheck(e){
     const item = e.target;
@@ -56,38 +57,42 @@ function deletecheck(e){
     //check mark
     if(item.classList[0] === 'complete-btn'){
         const todo = item.parentElement;
-        todo.classList.toggle('completed');
+        todo.classList.add('completed');
     }
 }
 
 function filterTodo(e){
-  var todos = todoList.childNodes;
-  todos.forEach(function(todo){
-      switch(e.target.value){
-          case "all":
-            
-              break; 
-              
-              case "completed":
-                 
-              if(todo.classList.contains("completed")){
-                  todo.style.display = "flex";
-              }    else{
-                  todo.style.display= "none";
-              }
-              break;
-
-              case "uncompleted":
-                if(todo.classList.contains("uncompleted")){
-                    todo.style.display = "flex";
+    var todos = Array.from(todoList.childNodes).slice(1);
+    todos.forEach(function(todoItem){
+        switch(e.target.value){
+            case "all":
+                todoItem.style.display = "flex";
+                break;
+                
+                case "completed":
+                    if(todoItem.classList.contains('completed')){
+                        todoItem.style.display = 'flex';
                 }    else{
-                    todo.style.display= "none";
+                    todoItem.style.display = 'none';
                 }
                 break;
-        
-      }
-  })
+                
+                case "uncompleted":
+                    if(!todoItem.classList.contains('completed')){
+                        todoItem.style.display = 'flex';
+                    }    else{
+                        todoItem.style.display = 'none';
+                    } 
+                    break;   
+
+                default:
+                    todoItem.style.display = 'none';
+                    break;
+        }
+   })
 }
+
+
 
 function saveLocalTodos(todo){
     let todos;
