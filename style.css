@@ -106,3 +106,22 @@ select{
     background : white;
     color: #ff6f47;
 }
+@media only screen and (max-width: 1000px) {
+    .header{
+        text-align: center;
+    }
+    form{
+        text-align: center;
+        width: 80%;
+    }
+    form input, form button{
+        width: auto;
+        padding: 0.3rem;
+
+    }
+    form input{
+        width: 90%;
+        padding: 0.4rem;
+    }
+  }
+  
